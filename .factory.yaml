@@ -1,0 +1,15 @@
+# AI Factory per-repo config (see ai-factory/.factory.yaml.example). The agent reads it too, so keep it honest.
+build: ./gradlew build -x test --quiet
+test: ./gradlew test --quiet
+check: ./gradlew check --quiet
+default_branch: main
+allowed_tools:
+  - "Bash(./gradlew *)"
+  - "Bash(git diff *)"
+  - "Bash(git status *)"
+  - Read
+  - Edit
+  - Write
+  - Glob
+  - Grep
+max_changed_files: 25
