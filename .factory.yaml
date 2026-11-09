@@ -1,5 +1,5 @@
 # AI Factory per-repo config (see ai-factory/.factory.yaml.example). The agent reads it too, so keep it honest.
-build: ./gradlew build -x test --quiet
+build: ./gradlew check --quiet # with network: fetches everything the offline check needs, test deps included
 test: ./gradlew test --quiet
 check: ./gradlew check --quiet
 default_branch: main

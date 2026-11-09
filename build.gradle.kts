@@ -8,7 +8,7 @@ group = "nl.badgerhill"
 version = "0.1.0-SNAPSHOT"
 
 java {
-    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+    toolchain { languageVersion = JavaLanguageVersion.of(25) }
 }
 
 repositories { mavenCentral() }
