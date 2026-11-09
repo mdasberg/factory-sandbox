@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Sandbox greeting API
+  version: 0.1.0
+paths:
+  /greetings:
+    post:
+      tags: [greetings]
+      operationId: greet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GreetRequest'
+      responses:
+        '200':
+          description: The stored greeting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Greeting'
+    get:
+      tags: [greetings]
+      operationId: history
+      responses:
+        '200':
+          description: All greetings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Greeting'
+  /goodbye:
+    get:
+      tags: [goodbye]
+      operationId: goodbye
+      responses:
+        '200':
+          description: A goodbye
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    GreetRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          pattern: '.*\S.*'
+    Greeting:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        text:
+          type: string

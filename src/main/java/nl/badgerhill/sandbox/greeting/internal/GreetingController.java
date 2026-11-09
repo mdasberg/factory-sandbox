@@ -1,20 +1,14 @@
 package nl.badgerhill.sandbox.greeting.internal;
 
-import jakarta.validation.constraints.NotBlank;
 import java.util.List;
 import nl.badgerhill.sandbox.greeting.Greeting;
 import nl.badgerhill.sandbox.greeting.GreetingService;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import nl.badgerhill.sandbox.greeting.internal.api.GreetingsApi;
+import nl.badgerhill.sandbox.greeting.internal.api.model.GreetRequest;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/greetings")
-@Validated
-class GreetingController {
+class GreetingController implements GreetingsApi {
 
     private final GreetingService service;
 
@@ -22,16 +16,13 @@ class GreetingController {
         this.service = service;
     }
 
-    record GreetRequest(@NotBlank String name) {
+    @Override
+    public Greeting greet(GreetRequest request) {
+        return service.greet(request.getName());
     }
 
-    @PostMapping
-    Greeting greet(@RequestBody @jakarta.validation.Valid GreetRequest request) {
-        return service.greet(request.name());
-    }
-
-    @GetMapping
-    List<Greeting> history() {
+    @Override
+    public List<Greeting> history() {
         return service.history();
     }
 }

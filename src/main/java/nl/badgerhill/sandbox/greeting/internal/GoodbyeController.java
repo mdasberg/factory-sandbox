@@ -1,13 +1,13 @@
 package nl.badgerhill.sandbox.greeting.internal;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import nl.badgerhill.sandbox.greeting.internal.api.GoodbyeApi;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-class GoodbyeController {
+class GoodbyeController implements GoodbyeApi {
 
-    @GetMapping("/goodbye")
-    String goodbye() {
+    @Override
+    public String goodbye() {
         return "Goodbye!";
     }
 }
