@@ -22,4 +22,13 @@ class GreetingApiTest {
         List<Greeting> all = greetings.history();
         assertThat(all).extracting(Greeting::name).contains("factory");
     }
+
+    @Test
+    void farewellIsKeptInHistoryAfterGreeting() {
+        greetings.greet("Ada");
+        Greeting bye = greetings.farewell("Ada");
+        assertThat(bye.text()).isEqualTo("Goodbye, Ada!");
+        List<String> texts = greetings.history().stream().map(Greeting::text).toList();
+        assertThat(texts.indexOf("Hello, Ada!")).isLessThan(texts.indexOf("Goodbye, Ada!"));
+    }
 }

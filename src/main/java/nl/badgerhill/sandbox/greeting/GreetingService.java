@@ -7,5 +7,7 @@ public interface GreetingService {
 
     Greeting greet(String name);
 
+    Greeting farewell(String name);
+
     List<Greeting> history();
 }
