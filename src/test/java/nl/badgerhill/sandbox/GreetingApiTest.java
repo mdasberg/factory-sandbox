@@ -31,4 +31,24 @@ class GreetingApiTest {
         List<String> texts = greetings.history().stream().map(Greeting::text).toList();
         assertThat(texts.indexOf("Hello, Ada!")).isLessThan(texts.indexOf("Goodbye, Ada!"));
     }
+
+    @Test
+    void frenchTexts() {
+        assertThat(greetings.greetInFrench("Ada").text()).isEqualTo("Bonjour, Ada!");
+        assertThat(greetings.farewellInFrench("Ada").text()).isEqualTo("Au revoir, Ada!");
+    }
+
+    @Test
+    void historyKeepsEnglishAndFrenchInOrder() {
+        greetings.greet("Zoe");
+        greetings.greetInFrench("Zoe");
+        greetings.farewellInFrench("Zoe");
+        List<String> texts = greetings.history().stream().map(Greeting::text).toList();
+        int hello = texts.indexOf("Hello, Zoe!");
+        int bonjour = texts.indexOf("Bonjour, Zoe!");
+        int revoir = texts.indexOf("Au revoir, Zoe!");
+        assertThat(hello).isNotNegative();
+        assertThat(hello).isLessThan(bonjour);
+        assertThat(bonjour).isLessThan(revoir);
+    }
 }
