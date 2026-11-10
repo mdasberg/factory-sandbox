@@ -30,6 +30,11 @@ class GreetingController {
         return service.greet(request.name());
     }
 
+    @PostMapping("/farewell")
+    Greeting farewell(@RequestBody @jakarta.validation.Valid GreetRequest request) {
+        return service.farewell(request.name());
+    }
+
     @GetMapping
     List<Greeting> history() {
         return service.history();

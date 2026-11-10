@@ -23,6 +23,12 @@ class DefaultGreetingService implements GreetingService {
     }
 
     @Override
+    public Greeting farewell(String name) {
+        var saved = repository.save(new GreetingEntity(name, "Goodbye, " + name + "!"));
+        return toGreeting(saved);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Greeting> history() {
         return repository.findAllByOrderByIdAsc().stream().map(DefaultGreetingService::toGreeting).toList();
