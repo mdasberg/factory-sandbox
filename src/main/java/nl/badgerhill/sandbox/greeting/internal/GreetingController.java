@@ -35,6 +35,16 @@ class GreetingController {
         return service.farewell(request.name());
     }
 
+    @PostMapping("/french")
+    Greeting greetInFrench(@RequestBody @jakarta.validation.Valid GreetRequest request) {
+        return service.greetInFrench(request.name());
+    }
+
+    @PostMapping("/farewell/french")
+    Greeting farewellInFrench(@RequestBody @jakarta.validation.Valid GreetRequest request) {
+        return service.farewellInFrench(request.name());
+    }
+
     @GetMapping
     List<Greeting> history() {
         return service.history();

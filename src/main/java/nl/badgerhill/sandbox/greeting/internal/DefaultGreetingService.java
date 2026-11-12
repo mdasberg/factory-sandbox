@@ -29,6 +29,18 @@ class DefaultGreetingService implements GreetingService {
     }
 
     @Override
+    public Greeting greetInFrench(String name) {
+        var saved = repository.save(new GreetingEntity(name, "Bonjour, " + name + "!"));
+        return toGreeting(saved);
+    }
+
+    @Override
+    public Greeting farewellInFrench(String name) {
+        var saved = repository.save(new GreetingEntity(name, "Au revoir, " + name + "!"));
+        return toGreeting(saved);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Greeting> history() {
         return repository.findAllByOrderByIdAsc().stream().map(DefaultGreetingService::toGreeting).toList();

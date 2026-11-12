@@ -9,5 +9,9 @@ public interface GreetingService {
 
     Greeting farewell(String name);
 
+    Greeting greetInFrench(String name);
+
+    Greeting farewellInFrench(String name);
+
     List<Greeting> history();
 }
